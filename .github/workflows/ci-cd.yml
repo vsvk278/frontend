@@ -1,0 +1,38 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      # Step 4: Build the application
+      - name: Build Next.js app
+        run: npm run build
+        working-directory: ./frontend
+
+      # Step 5: Upload artifacts (optional)
+      - name: Upload production-ready build
+        uses: actions/upload-artifact@v3
+        with:
+          name: nextjs-build
+          path: frontend/.next

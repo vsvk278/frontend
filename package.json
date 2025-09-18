@@ -1,0 +1,1 @@
+{ "name": "mock-nextjs-app", "scripts": { "dev": "next dev", "build": "next build" } }
